@@ -28,16 +28,41 @@ hs.hotkey.bind(mash, 'm', function() hs.window.focusedWindow():move(units.maximu
 hs.hotkey.bind(mash, 'l', function() hs.window.focusedWindow():move(units.right33,    nil, true) end)
 hs.hotkey.bind(mash, 'h', function() hs.window.focusedWindow():move(units.left33,     nil, true) end)
 hs.hotkey.bind(mash, 'j', function() hs.window.focusedWindow():move(units.bot33,      nil, true) end)
+hs.hotkey.bind(mash, 'k', function() hs.window.focusedWindow():move(units.top33,      nil, true) end)
 hs.hotkey.bind(mash, 'n', function() hs.window.focusedWindow():move(units.vmid33,     nil, true) end)
 hs.hotkey.bind(mash, 'c', function() hs.window.focusedWindow():move(units.center,     nil, true) end)
 -- small monitors, split in half
-hs.hotkey.bind(mash, 'k', function() hs.window.focusedWindow():move(units.top50,      nil, true) end)
 -- big monitor layers:  | bigbox | littlebox |
 hs.hotkey.bind(mash, '[', function() hs.window.focusedWindow():move(units.upleft70,   nil, true) end)
-hs.hotkey.bind(mash, ']', function() hs.window.focusedWindow():move(units.upright33,  nil, true) end)
+-- hs.hotkey.bind(mash, ']', function() hs.window.focusedWindow():move(units.upright33,  nil, true) end)
 hs.hotkey.bind(mash, ';', function() hs.window.focusedWindow():move(units.botleft70,  nil, true) end)
 hs.hotkey.bind(mash, "'", function() hs.window.focusedWindow():move(units.botright33, nil, true) end)
 
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Up", function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  f.x = max.x
+  f.y = max.y
+  f.w = max.w
+  f.h = max.h / 2
+  win:setFrame(f)
+end)
+
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Down", function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  f.x = max.x
+  f.y = max.y + (max.h / 2)
+  f.w = max.w
+  f.h = max.h / 2
+  win:setFrame(f)
+end)
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", function()
   local win = hs.window.focusedWindow()
